@@ -1,0 +1,48 @@
+version: "3.1"
+services:
+
+    memcached:
+      image: memcached:alpine
+      container_name: moodle-memcached
+
+    redis:
+      image: redis:alpine
+      container_name: moodle-redis
+
+    mysql:
+      image: mysql:5.7
+      container_name: moodle-mysql
+      working_dir: /application
+      environment:
+        - MYSQL_ROOT_PASSWORD=root
+        - MYSQL_DATABASE=moodle
+        - MYSQL_USER=moodle
+        - MYSQL_PASSWORD=moodle
+
+    webserver:
+      image: nginx:alpine
+      container_name: moodle-webserver
+      working_dir: /application
+      volumes:
+          - .:/application
+          - ./phpdocker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      ports:
+       - "80:80"
+       - "443:443"
+      links:
+       - php-fpm
+
+    php-fpm:
+      build:
+        context: .
+        dockerfile: phpdocker/php-fpm/Dockerfile
+      container_name: moodle-php-fpm
+      working_dir: /application
+      volumes:
+        - .:/application
+        - ./phpdocker/php-fpm/php-ini-overrides.ini:/etc/php5/fpm/conf.d/99-overrides.ini
+
+      links:
+        - memcached
+        - mysql
+        - redis
