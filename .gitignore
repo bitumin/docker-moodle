@@ -56,10 +56,6 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
-bht_moodledata/**
-!bht_moodledata/.htaccess
-phpu_moodledata/
-moodledata/**
-!moodledata/.htaccess
+*moodledata
 public/*
 !public/index.php
