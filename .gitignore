@@ -58,8 +58,7 @@ Temporary Items
 .apdisk
 bht_moodledata/**
 !bht_moodledata/.htaccess
-phpu_moodledata/**
-!phpu_moodledata/.htaccess
+phpu_moodledata/
 moodledata/**
 !moodledata/.htaccess
 public/*
