@@ -13,7 +13,10 @@ RUN apt-get update \
     php5-redis \
     php5-xdebug \
     php5-xmlrpc \
+    locales \
     && apt-get clean; \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/* \
+    && printf 'en_AU.UTF-8 UTF-8\n' >> /etc/locale.gen \
+    && locale-gen
 
 WORKDIR "/application"
