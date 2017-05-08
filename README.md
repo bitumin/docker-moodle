@@ -2,27 +2,27 @@
 
 ## Resumen
 
-Todo lo necesario para ejecutar Moodle (php, mysql, nginx, memcached, redis...) correrá en contenedores docker, pero gestionaremos las distintas instalaciones de Moodle en nuestro entorno local para ganar en flexibilidad a la hora de testear nuevas versiones de Moodle, mantener instalaciones con configuraciones distintas, etc.
+Todo lo necesario para ejecutar Moodle (php, mysql, nginx, memcached, redis...) corre en contenedores docker. Gestionamos las distintas instalaciones de Moodle desde nuestro entorno local para flexibilizar el testeo de nuevas versiones de Moodle y el mantenimiento de instalaciones con distintas configuraciones.
 
 ## Requerimientos del entorno local
 
-* git: para gestionar los repositorios de moodle
-* docker y docker-compose: para gestionar las imágenes y contenedores docker
-* docker-sync: opcional, sólo en OSX, para mejorar el rendimiento de docker
-* node y npm: opcional, frontend dev, para para gestionar módulos amd en moodle
-* php y composer: opcional, testing, para instalar dependencias PHP necesarias para phpunit, behat, etc.
+* git: gestionar los repositorios de moodle
+* docker y docker-compose: gestionar las imágenes y contenedores docker
+* docker-sync: opcional, sólo en OSX, mejorar el rendimiento de docker
+* node y npm: opcional, frontend dev, gestionar módulos AMD de Moodle
+* php y composer: opcional, testing, instalar dependencias PHP necesarias para los testing frameworks
 
 ## Preparación del entorno docker
 
 ```
 git clone https://github.com/bitumin/docker-moodle.git docker-moodle
 cd docker-moodle
-docker-compose up -d # initialize and start all containers
+docker-compose up -d # prepare images and start all containers
 ```
 
-Comprueba que el servidor web servidor por el contenedor docker funciona correctamente visitando con un browser `http://localhost`
+Comprueba que el servidor web servidor por el contenedor docker funciona correctamente visitando `http://localhost`
 
-## Realizar nueva instalación de Moodle
+## Realizar nueva instalación de Moodle (manualmente)
 
 ```
 cd public
@@ -56,7 +56,7 @@ Modifica los ficheros `config.php` de tus instalaciones Moodle que habrán sido 
 
 Service|Hostname|Port number
 ------|---------|-----------
-Webserver|[localhost](http://localhost)|80
+Webserver|[localhost](http://localhost:8080)|8080
 php-fpm|php-fpm|9000
 MySQL|mysql|3306
 Memcached|memcached|11211
