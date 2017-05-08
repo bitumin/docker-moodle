@@ -20,7 +20,7 @@ cd docker-moodle
 docker-compose up -d # prepare images and start all containers
 ```
 
-Comprueba que el servidor web servidor por el contenedor docker funciona correctamente visitando `http://localhost`
+Comprueba que el servidor web funciona correctamente visitando `http://localhost:8080`
 
 ## Realizar nueva instalación de Moodle (manualmente)
 
@@ -30,10 +30,10 @@ git clone --depth=1 -b MOODLE_[VERSION]_STABLE git://git.moodle.org/moodle.git [
 # git clone --depth=1 -b master git://git.moodle.org/moodle.git [MOODLE_PATH] # Última versión de Moodle
 ```
 
-0. Visitar http://localhost/\[MOODLE_PATH\] para terminar la instalación de Moodle
+0. Visitar http://localhost:8080/MOODLE_PATH para terminar la instalación de Moodle
 1. Elegir idioma deseado
 2. Elegir directorio de datos (si vamos a trabajar con múltiples instalaciones crear un nuevo moodledata para cada una)
-3. Controlador de base de datos: MySQL mejorado (natice/mysqli)
+3. Controlador de base de datos: MySQL mejorado (native/mysqli)
 4. Configuración base de datos:
     * Servidor: mysql
     * Nombre: moodle
@@ -50,7 +50,7 @@ git clone --depth=1 -b MOODLE_[VERSION]_STABLE git://git.moodle.org/moodle.git [
 
 ## Configuración adicional de la instalación Moodle
 
-Modifica los ficheros `config.php` de tus instalaciones Moodle que habrán sido generados durante la instalación. Puedes utilizar como referencia el fichero `config-dev.php` (en la raíz de este proyecto), con ejemplos de configuraciones típicas para un entorno de desarrollo. 
+Modifica el fichero `config.php` generado durante la instalación. Puedes utilizar como referencia el fichero `config-dev.php` (en la raíz de este proyecto), con ejemplos de configuraciones típicas para un entorno de desarrollo. 
 
 ## Servicios disponibles
 
@@ -68,11 +68,15 @@ Redis|redis|6379
   * Start containers on the foreground: `docker-compose up`. You will see a stream of logs for every container running.
   * Stop containers: `docker-compose stop`
   * Kill containers: `docker-compose kill`
+  * Remove containers: `docker-compose rm`
   * Rebuild images after updating dockerfiles: `docker-compose build --no-cache`
   * View container logs: `docker-compose logs`
   * Execute command inside of container: `docker-compose exec SERVICE_NAME COMMAND` where `COMMAND` is whatever you want to run. Examples:
     * Shell into the PHP container, `docker-compose exec php-fpm bash`
     * Open a mysql shell, `docker-compose exec mysql mysql -uroot -pCHOSEN_ROOT_PASSWORD`
+  * Stop all containers, `docker stop $(docker ps -a -q)`
+  * Delete all containers `docker rm $(docker ps -a -q)`
+  * Delete all images `docker rmi $(docker images -q)`
 
 ## Recomendaciones de uso de docker
 
@@ -82,11 +86,10 @@ Redis|redis|6379
 ## Por hacer
 
 * Configuración ssh
-* Configuración phpunit
 * Configuración behat
 * Configuración memchaced
 * Configuración redis
 
 ## Créditos
 
-Ficheros originales pre-generados usando [https://phpdocker.io/generator](https://phpdocker.io/generator)
+Ficheros originales pregenerados con [https://phpdocker.io/generator](https://phpdocker.io/generator)
