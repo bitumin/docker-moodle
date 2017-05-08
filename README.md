@@ -22,12 +22,26 @@ docker-compose up -d # prepare images and start all containers
 
 Comprueba que el servidor web funciona correctamente visitando `http://localhost:8080`
 
+## Realizar nueva instalación de Moodle (automáticamente)
+
+Puedes utilizar el script new-moodle.sh parar crear una nueva instalación de Moodle. 
+El script require de dos parámetros:
+* --version=`[MOODLE_VERSION]`: Versión de Moodle que deseas instalar, ej.: 29, 30, 31... (instalará la última versión estable de la version indicada)
+* --prefix=`[PREFIX]`: Prefijo para las tablas de base de datos y nuevos directorios (es importante utilizar un prefijo único para cada nueva instalación)
+
+Ejemplo:
+```
+sh new-moodle.sh --version=32 --prefix=mdl32_
+```
+
 ## Realizar nueva instalación de Moodle (manualmente)
 
 ```
 cd public
-git clone --depth=1 -b MOODLE_[VERSION]_STABLE git://git.moodle.org/moodle.git [MOODLE_PATH] # Versión estable
-# git clone --depth=1 -b master git://git.moodle.org/moodle.git [MOODLE_PATH] # Última versión de Moodle
+# Versión estable
+git clone --depth=1 -b MOODLE_[VERSION]_STABLE git://git.moodle.org/moodle.git [MOODLE_PATH] 
+# Última versión de Moodle
+git clone --depth=1 -b master git://git.moodle.org/moodle.git [MOODLE_PATH] 
 ```
 
 0. Visitar http://localhost:8080/MOODLE_PATH para terminar la instalación de Moodle
