@@ -68,6 +68,7 @@ Redis|redis|6379
   * Start containers on the foreground: `docker-compose up`. You will see a stream of logs for every container running.
   * Stop containers: `docker-compose stop`
   * Kill containers: `docker-compose kill`
+  * Rebuild images after updating dockerfiles: `docker-compose build --no-cache`
   * View container logs: `docker-compose logs`
   * Execute command inside of container: `docker-compose exec SERVICE_NAME COMMAND` where `COMMAND` is whatever you want to run. Examples:
     * Shell into the PHP container, `docker-compose exec php-fpm bash`
