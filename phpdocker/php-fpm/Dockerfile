@@ -1,4 +1,3 @@
-# Extends phpdockerio/php56-cli
 FROM phpdockerio/php56-fpm:latest
 
 # Install selected extensions and other stuff
@@ -18,8 +17,8 @@ RUN apt-get update \
     clamav-daemon \
     clamav-freshclam \
     && apt-get clean; \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/* \
-    && printf 'en_AU.UTF-8 UTF-8\n' >> /etc/locale.gen \
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/*; \
+    printf 'en_AU.UTF-8 UTF-8\n' >> /etc/locale.gen \
     && locale-gen; \
     mkdir -p /var/run/clamav \
     && chown clamav:clamav /var/run/clamav \
@@ -31,4 +30,5 @@ RUN apt-get update \
 
 WORKDIR "/application"
 
-CMD ["/application/phpdocker/php-fpm/bootstrap.sh"]
+CMD freshclam -d \
+    & /usr/sbin/php5-fpm -F -O 2>&1 | sed -u 's,.*: \"\(.*\)$,\1,'| sed -u 's,"$,,' 1>&1

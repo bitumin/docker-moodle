@@ -41,7 +41,8 @@ services:
       volumes:
         - .:/application
         - ./phpdocker/php-fpm/php-ini-overrides.ini:/etc/php5/fpm/conf.d/99-overrides.ini
-
+        - ./phpdocker/php-fpm/clamd.conf:/etc/clamav/clamd.conf
+        - ./phpdocker/php-fpm/freshclam.conf:/etc/clamav/freshclam.conf
       links:
         - memcached
         - mysql
