@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Exit on error
-set -e
+#set -e
 
 # Colors
 BLACK='\033[0;30m'
@@ -123,6 +123,8 @@ docker-compose exec php-fpm php "/application/public/${MOODLEDIR}/admin/cli/inst
     --allow-unstable \
     &> /dev/null; (exit $?)
 printf "${OK}"
+
+#todo: resolve exec php exiting with error code
 
 cd ${PREFIX}moodle
 
