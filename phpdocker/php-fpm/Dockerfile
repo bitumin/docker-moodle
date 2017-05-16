@@ -22,15 +22,13 @@ RUN apt-get update \
     && printf 'en_AU.UTF-8 UTF-8\n' >> /etc/locale.gen \
     && locale-gen; \
     mkdir -p /var/run/clamav \
-    && chown clamav:clamav /var/run/clamav; \
+    && chown clamav:clamav /var/run/clamav \
+    && chmod 750 /var/run/clamav; \
     mkdir -p /var/lib/clamav \
     && chown -R clamav:clamav /var/lib/clamav; \
-    sed -i 's/^Foreground .*$/Foreground true/g' /etc/clamav/clamd.conf; \
-    sed -i 's/^Foreground .*$/Foreground true/g' /etc/clamav/freshclam.conf; \
     adduser www-data clamav \
-    && adduser clamav www-data; \
-    /usr/bin/freshclam --config-file=/etc/clamav/freshclam.conf;
+    && adduser clamav www-data;
 
 WORKDIR "/application"
 
-CMD ["/application/bootstrap.sh"]
+CMD ["/application/phpdocker/php-fpm/bootstrap.sh"]
