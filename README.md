@@ -88,6 +88,9 @@ Redis|redis|6379
   * Execute command inside of container: `docker-compose exec SERVICE_NAME COMMAND` where `COMMAND` is whatever you want to run. Examples:
     * Shell into the PHP container, `docker-compose exec php-fpm bash`
     * Open a mysql shell, `docker-compose exec mysql mysql -uroot -pCHOSEN_ROOT_PASSWORD`
+
+## Docker: cheatsheet
+
   * Stop all containers, `docker stop $(docker ps -a -q)`
   * Delete all containers `docker rm $(docker ps -a -q)`
   * Delete all images `docker rmi $(docker images -q)`

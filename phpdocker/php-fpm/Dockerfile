@@ -14,9 +14,23 @@ RUN apt-get update \
     php5-xdebug \
     php5-xmlrpc \
     locales \
+    clamav \
+    clamav-daemon \
+    clamav-freshclam \
     && apt-get clean; \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /usr/share/doc/* \
     && printf 'en_AU.UTF-8 UTF-8\n' >> /etc/locale.gen \
-    && locale-gen
+    && locale-gen; \
+    mkdir -p /var/run/clamav \
+    && chown clamav:clamav /var/run/clamav; \
+    mkdir -p /var/lib/clamav \
+    && chown -R clamav:clamav /var/lib/clamav; \
+    sed -i 's/^Foreground .*$/Foreground true/g' /etc/clamav/clamd.conf; \
+    sed -i 's/^Foreground .*$/Foreground true/g' /etc/clamav/freshclam.conf; \
+    adduser www-data clamav \
+    && adduser clamav www-data; \
+    /usr/bin/freshclam --config-file=/etc/clamav/freshclam.conf;
 
 WORKDIR "/application"
+
+CMD ["/application/bootstrap.sh"]

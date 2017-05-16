@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Exit on error
+set -e
+
 # Colors
 BLACK='\033[0;30m'
 GREEN='\033[0;32m'
@@ -122,6 +125,14 @@ docker-compose exec php-fpm php "/application/public/${MOODLEDIR}/admin/cli/inst
 printf "${OK}"
 
 cd ${PREFIX}moodle
+
+_printf "config.php clamav antivirus..."
+sed -i'' -e '/\$CFG->directorypermissions = 02777;/a\
+\
+\$CFG->runclamonupload = true;\
+\$CFG->pathtoclam = "/usr/bin/clamscan";\
+' config.php &> /dev/null
+printf "${OK}"
 
 _printf "config.php set default timezone..."
 sed -i'' -e '/\$CFG->directorypermissions = 02777;/a\
