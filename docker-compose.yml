@@ -20,12 +20,16 @@ services:
         - MYSQL_PASSWORD=moodle
 
     webserver:
-      image: nginx:alpine
+      build:
+        context: .
+        dockerfile: phpdocker/nginx/Dockerfile
       container_name: moodle-webserver
       working_dir: /application
       volumes:
           - .:/application
+          - ./phpdocker/nginx/common.include.conf:/etc/nginx/common.include.conf
           - ./phpdocker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+          - ./phpdocker/nginx/ssl.conf:/etc/nginx/conf.d/ssl.conf
       ports:
        - "8080:8080"
        - "443:443"

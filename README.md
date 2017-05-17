@@ -83,6 +83,7 @@ Redis|redis|6379
   * Stop containers: `docker-compose stop`
   * Kill containers: `docker-compose kill`
   * Remove containers: `docker-compose rm`
+  * Stop and remove container: `docker-compose down`
   * Rebuild images after updating dockerfiles: `docker-compose build --no-cache`
   * View container logs: `docker-compose logs`
   * Execute command inside of container: `docker-compose exec SERVICE_NAME COMMAND` where `COMMAND` is whatever you want to run. Examples:
@@ -102,7 +103,7 @@ Redis|redis|6379
 
 ## Por hacer
 
-* Configuración ssh
+* Configucación docker-sync para máquinas osx
 * Configuración behat
 * Configuración memchaced
 * Configuración redis

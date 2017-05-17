@@ -128,6 +128,14 @@ printf "${OK}"
 
 cd ${PREFIX}moodle
 
+_printf "config.php ssl wwwroot..."
+sed -i'' -e '/\$CFG->directorypermissions = 02777;/a\
+\
+// TLS/SSL wwwroot\
+//\$CFG->wwwroot   = "https://localhost/'"${PREFIX}"'_moodle";\
+' config.php &> /dev/null
+printf "${OK}"
+
 _printf "config.php clamav antivirus..."
 sed -i'' -e '/\$CFG->directorypermissions = 02777;/a\
 \

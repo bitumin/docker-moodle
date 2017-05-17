@@ -59,3 +59,5 @@ Temporary Items
 *moodledata
 public/*
 !public/index.php
+.docker-sync
+certbot.log
